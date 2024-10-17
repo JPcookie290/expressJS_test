@@ -1,4 +1,4 @@
-const {Client} = require('pg')
+const { Client } = require("pg");
 
 const SQL = `
     CREATE TABLE IF NOT EXISTS roles(
@@ -9,7 +9,7 @@ const SQL = `
     VALUES  ('user'),
             ('members'),
            ('admin');
-    
+
     CREATE TABLE IF NOT EXISTS member_codes (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         code VARCHAR(255) NOT NULL DEFAULT gen_random_uuid()
@@ -35,18 +35,23 @@ const SQL = `
     );
 `;
 
-require('dotenv').config();
+require("dotenv").config();
 
 async function main() {
-    console.log('seeding ...');
-    const host = process.env.HOST; // localhost in .env
-    const client = new Client({
-        connectionString: `postgresql://postgres:ac:admin@localhost:5432/member_club`
-    })
-    await client.connect();
-    await client.query(SQL);
-    await client.end();
-    console.log('all done');
+  console.log("seeding ...");
+  const host = process.env.HOST; // localhost in .env
+  //win
+  /*const client = new Client({
+    connectionString: `postgresql://postgres:ac:admin@localhost:5432/member_club`,
+  });*/
+  //mac
+  const client = new Client({
+    connectionString: `postgresql://postgres:1212@localhost:5432/member_club`,
+  });
+  await client.connect();
+  await client.query(SQL);
+  await client.end();
+  console.log("all done");
 }
 
 main();

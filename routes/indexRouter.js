@@ -1,6 +1,7 @@
 // Other version
 // const { Router } = require("express");
 // const indexRouter = Router();
+const passport = require("passport");
 
 const indexRouter = require("express").Router();
 
@@ -8,9 +9,30 @@ const indexRouter = require("express").Router();
 const indexController = require("../controllers/indexController");
 indexRouter.get("/", indexController.indexMessageGet);
 
-//login/signup
+//signup
 const signUpController = require("../controllers/signUpController");
 indexRouter.get("/signup", signUpController.singUpGet);
 indexRouter.post("/signup", signUpController.singUpPost);
+
+//login
+const loginController = require("../controllers/loginController");
+indexRouter.get("/login", loginController.loginGet);
+indexRouter.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login-failure",
+    successRedirect: "/",
+  })
+);
+
+//logout
+indexRouter.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+});
 
 module.exports = indexRouter;
