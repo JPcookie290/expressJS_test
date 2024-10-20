@@ -1,11 +1,44 @@
-<%- include('partials/header', {title:title}) %>
+<%- include("partials/header", {title: title}) %>
 <main>
-  <h1>Index - message board</h1>
-  <% if(locals.currentUser) { %>
-  <h2>
-    Welcome <%= currentUser.forename %> you are logged in as <%= currentUser.role
-    %>
-  </h2>
-  <% } %>
+    <h1>Index Message Board</h1>
+    <% if(locals.currentUser) { %>
+        <h2>Welcome <%= currentUser.forename %>! You are logged in as <%= currentUser.role %>.</h2>
+    <% } %>
+
+    <% messages.forEach( message => { %>
+        <div class="message-card">
+            <h3><%= message.title %></h3>
+            <p><%= message.message %></p>
+
+            <!-- TODO not working -->
+            <% if(locals.currentUser === "members" || locals.currentUser === "admin") { %>
+                <p>Created by <%= message.forename %> <%= message.surname %>
+                on <span class="formatted-date">
+                    <%= new Intl.DateTimeFormat('en-GB', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        }).format(new Date(message.date)) %>
+                </span>
+            </p>
+            <% }%>
+            <% if(locals.currentUser === "admin") { %>
+                <button class="delete-btn" data-message-id="<%= message.id %>" aria-label="Delete Message">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            <% } %>
+
+        </div>
+    <% }) %>
 </main>
-<%- include('partials/footer') %>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to delete this message?</p>
+        <button id="confirmDeleteBtn">Yes</button>
+        <button id="cancelDeleteBtn">No</button>
+    </div>
+</div>
+
+<%- include("partials/footer") %>
+<script src="./deleteMessage.js"></script>

@@ -1,5 +1,11 @@
 const messageRouter = require("express").Router();
+const { isAuth, isAdmin } = require("../middleware/authMiddleware");
 
-//messageRouter.get("/new", controller); // todo not working
+const messageController = require("../controllers/messageController");
+
+messageRouter.get("/new", isAuth, messageController.newMessageGet);
+messageRouter.post("/new", isAuth, messageController.newMessagePost);
+
+messageRouter.get("/:msgId/delete", isAuth, messageController.deleteMessageGet)
 
 module.exports = messageRouter;

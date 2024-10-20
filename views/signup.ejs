@@ -1,19 +1,26 @@
 <%- include('partials/header', {title:title}) %>
-<main>
+  <main class="form-wrapper">
     <%- include('partials/errors') %>
-  <form action="/signup" method="post">
-    <label for="forename">Forename:</label>
-    <input type="text" name="forename" id="forename" value="<%= locals.user ? user.forename : "" %>">
-    <label for="surname">Surname:</label>
-    <input type="text" name="surname" id="surename" value="<%= locals.user ? user.surname : "" %>">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" value="<%= locals.user ? user.email : "" %>">
-    <label for="password">New Password</label>
-    <input type="password" name="password" id="password">
-    <label for="pass-confirm">Confirm Password</label>
-    <input type="password" name="pass-confirm" id="pass-confirm">
-    <input type="submit" value="Sign-Up">
-  </form>
-  <span class="log-in-link">Already a member? <a href="/login">Log in</a></span>
-</main>  
-<%- include('partials/footer') %> 
+    <form action="/signup" method="post">
+        <label for="forename">Forename:</label>
+        <input type="text" name="forename" id="forename" class="form-control" value="<%= locals.user ? user.forename : "" %>">
+
+        <label for="surname">Surname:</label>
+        <input type="text" name="surname" id="surname" class="form-control" value="<%= locals.user ? user.surname : "" %>">
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" class="form-control" value="<%= locals.user ? user.email : "" %>">
+
+        <label for="password">New Password:</label>
+        <input type="password" name="password" id="password" class="form-control">
+
+        <label for="pass-confirm">Confirm Password:</label>
+        <input type="password" name="pass-confirm" id="pass-confirm" class="form-control">
+
+        <input type="submit" value="Sign-Up" class="submit-btn">
+    </form>
+
+    <span class="log-in-link">Already a member? <a href="/login">Log in</a></span>
+  </main>
+
+<%- include('partials/footer') %>

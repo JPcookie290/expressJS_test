@@ -17,7 +17,7 @@ const validateSchema = [
     // check forename & surname are letters and their current length
     body('forename')
     .isAlpha()
-    .withMessage(`forename ${alphaError}`) 
+    .withMessage(`forename ${alphaError}`)
     .isLength({min: 3, max: 30})
     .withMessage(`forename ${lengthError}`)
     .trim(),
@@ -36,7 +36,7 @@ const validateSchema = [
     body('password')
     .isLength({min: 4}) //TODO: change to 12
     .withMessage(`password ${passwordLengthError}`)
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/) 
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/)
     .withMessage(`password ${passwordCharError}`)
     .trim(),
     // check if pass-confirm is the same as password
@@ -44,7 +44,7 @@ const validateSchema = [
     .trim()
     .custom((value, {req}) => value === req.body.password) // form data is saved in the body object
     .withMessage(`password ${passConfirmError}`)
-    .trim(), 
+    .trim(),
 ];
 
 //render /views/signup.ejs
@@ -55,7 +55,7 @@ const singUpGet = (req, res) => {
 };
 
 const singUpPost = [
-    validateSchema, 
+    validateSchema,
     async (req, res, next) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
@@ -78,11 +78,11 @@ const singUpPost = [
                     password: hashedPassword
                 });
             })
-            res.render("/login");
+            res.render("/login"); //TODO: creates an error now??? -> needs fixing
         } catch (error) {
             next(error)
         }
-        
+
     },
 
 ];

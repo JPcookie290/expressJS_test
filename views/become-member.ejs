@@ -1,0 +1,13 @@
+<%- include("partials/header", {title: title}) %>
+
+<main>
+    <%- include('partials/errors') %>
+    <form action="/become-member" method="post">
+        <label for="memberCode">Enter your member code:</label>
+        <input type="text" name="memberCode" id="memberCode" class="form-control" placeholder="Example: 550e8400-e29b-41d4-a716-446655440000">
+
+        <input type="submit" class="submit-btn" value="Verify">
+    </form>
+</main>
+
+<%- include("partials/footer") %>

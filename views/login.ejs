@@ -1,11 +1,12 @@
 <%- include('partials/header', {title:title}) %>
-<main>
+<main class="form-wrapper">
   <form action="/login" method="post">
     <label for="username">Username:</label>
-    <input type="text" name="username" id="username">
+    <input type="text" name="username" id="username" class="form-control">
     <label for="password">Password</label>
-    <input type="password" name="password" id="password">
-    <input type="submit" value="login">
+    <input type="password" name="password" id="password" class="form-control">
+    <input type="submit" class="submit-btn" value="login">
+    <p>Not registered - <a href="/signup">Sign up</a></p>
   </form>
-</main>  
+</main>
 <%- include('partials/footer') %>

@@ -1,0 +1,19 @@
+<!-- TODO for some reason ignores css styling-->
+<%- include("partials/header", {title: title}) %>
+
+<main class="form-wrapper">
+    <%- include('partials/errors') %>
+    <h2>New Message</h2>
+    <form action="/messages/new" method="post">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" class="form-control" value="<% locals.message ? message.title : ""%>">
+        <label for="message">Message:</label>
+        <textarea name="message" id="message" class="form-control"><% locals.message ? message.title : ""%></textarea>
+
+        <input type="submit" class="submit-btn" value="Add new message">
+    </form>
+</main>
+
+
+
+<%- include("partials/footer") %>
