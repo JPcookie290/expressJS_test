@@ -41,13 +41,14 @@ async function main() {
   console.log("seeding ...");
   const host = process.env.HOST; // localhost in .env
   //win
-  /*const client = new Client({
+  const client = new Client({
     connectionString: `postgresql://postgres:ac:admin@localhost:5432/member_club`,
-  });*/
+  });
+  /*
   //mac
   const client = new Client({
     connectionString: `postgresql://postgres:1212@localhost:5432/member_club`,
-  });
+  });*/
   await client.connect();
   await client.query(SQL);
   await client.end();

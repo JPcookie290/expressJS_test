@@ -9,8 +9,20 @@
         <div class="message-card">
             <h3><%= message.title %></h3>
             <p><%= message.message %></p>
+            <p>Created by <%= message.forename %> <%= message.surname %>
+                on <span class="formatted-date">
+                    <%= new Intl.DateTimeFormat('en-GB', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        }).format(new Date(message.date)) %>
+                </span>
+            </p>
+            <button class="delete-btn" data-message-id="<%= message.id %>" aria-label="Delete Message">
+                <i class="fa-solid fa-trash"></i>
+            </button>
 
-            <!-- TODO not working -->
+            <!-- TODO not working 
             <% if(locals.currentUser === "members" || locals.currentUser === "admin") { %>
                 <p>Created by <%= message.forename %> <%= message.surname %>
                 on <span class="formatted-date">
@@ -26,7 +38,7 @@
                 <button class="delete-btn" data-message-id="<%= message.id %>" aria-label="Delete Message">
                     <i class="fa-solid fa-trash"></i>
                 </button>
-            <% } %>
+            <% } %>-->
 
         </div>
     <% }) %>
